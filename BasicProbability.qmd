@@ -1,0 +1,115 @@
+---
+title: "Probability: Basic Definitions and Rules"
+author: "Ognjen Raketic"
+format: pdf
+editor: visual
+jupyter: python3
+---
+
+## Probability: Basic Definitions and Rules
+
+-   In the last lecture we already discussed in the special context of classical probability with equally probably cases some basic notions of probability theory
+
+-   Today I want to establish theses notions a bit more generally and define them in mathematical terms independent of how probability is interpreted.
+
+-   We formulate the concepts of probability theory in a way where probabilities are given and only have to fulfill certain axioms or rules
+
+-   These rules will encompass what we discussed in the last lecture as one special case.
+
+    -   Random Experiment When we use the term (random) experiment we mean a process leading to an uncertain outcome.
+
+    -   Sample space The collection of all possible outcomes of an experiment is called the sample space
+
+    -   Basic outcome, event, simple event When we talk of a basic outcome we mean the possible outcome of a random experiment. An event is a subset of basic outcomes. Any event which consists of a single outcome in the sample space is called a simple event.
+
+    -   Probability Probability is a measure of how likely an event of an experiment is
+
+-   Note that in probability theory probabilities are numbers between 0 and 1 which fulfill certain rules and are defined with respect to a random experiment and a sample space
+
+-   From the viewpoint of theory they are considered as given
+
+-   Probabilities in probability theory are of the same nature as distances in geometry
+
+-   In probability theory we need not assume anything about how probabilities are measured
+
+-   In actual applications of probabilities we often need sophisticated statistical methods to determine probabilities
+
+-   Probability Given a (discrete) sample space S the probability assigned to events in this sample space must always fulfill three rules:
+
+    -   P($S$) = 1, where $S$ is the sample space
+
+    -   For any event A ∈ $S$, 0 ≤ P(A) ≤ 1. The probability of an event can never be negative or larger than 1
+
+    -   The probability of the union of two events A and B is always smaller or equal to the sum of the probability of these events looked at in isolation: P(A ∪ B) ≤ P(A) + P(B)
+
+-   Create a virtual coin:
+
+    ```{r}
+    coin <- c("H","T")
+    ```
+
+-   and a function to toss it:
+
+    ```{r}
+    toss_coin <- function() {coin <- c("H","T")
+    sample(coin,size=1) }
+    ```
+
+    ```{r}
+    tosses_100 <- replicate(100, toss_coin())
+
+    library(ggplot2)
+    qplot(tosses_100)
+    ```
+
+-   toss 1000 times
+
+    ```{r}
+    tosses_1000 <- replicate(1000,toss_coin())
+
+    qplot(tosses_1000)
+    ```
+
+-   toss 1 million times
+
+    ```{r}
+    tosses_1mill <- replicate(10^6,toss_coin())
+
+    qplot(tosses_1mill)
+    ```
+
+-   apple prices read:
+
+    ```{r}
+    aapl_prices <- read.csv("C:\\Users\\Rakete\\OneDrive\\Radna površina\\aapl_prices.csv")
+    ```
+
+-   Lets inspect the object using the function head() with the parameter value n = 5. This will show me the first 10 rows of the datafile.
+
+    ```{r}
+    head(aapl_prices,n=5)
+    ```
+
+-   An atomic vector is just a simple vector of data. For example our die constructed in the first lecture is an instance of this.
+
+    ```{r}
+    die <- 1:6
+    ```
+
+-   If you explicitly specify number as integers, you need to append the letter L to the number
+
+    ```{r}
+    die_int <- c(1L,2L,3L,4L,5L,6L)
+
+    typeof(die_int)
+    ```
+
+    ```{r}
+    list_example <- list(100:130, "R", list(TRUE, FALSE))
+    ```
+
+-   If you select two or more columns from a data frame, R will return a new data frame, like in
+
+    ```{r}
+    aapl_prices[1:2,1:6]
+    ```
